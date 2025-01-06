@@ -1,0 +1,354 @@
+Last login: Mon Jan  6 10:37:53 on ttys007
+source ~/.bash_profile
+(base) thomaskamsker@MacBook-Pro azure-search-openai-demo % source ~/.bash_profile
+(base) thomaskamsker@MacBook-Pro azure-search-openai-demo % pwd
+/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo
+(base) thomaskamsker@MacBook-Pro azure-search-openai-demo % git pull 
+Bereits aktuell.
+(base) thomaskamsker@MacBook-Pro azure-search-openai-demo % 
+(base) thomaskamsker@MacBook-Pro azure-search-openai-demo % azd up --help 
+
+Runs a workflow to package, provision and deploy your application in a single step.
+
+The up workflow can be customized by adding a workflows section to your azure.yaml.
+
+For example, modify the workflow to provision before packaging and deploying:
+
+-------------------------
+# azure.yaml
+workflows:
+  up:
+    - azd: provision
+    - azd: package --all
+    - azd: deploy --all
+-------------------------
+
+Any azd command and flags are supported in the workflow steps.
+
+Usage
+  azd up [flags]
+
+Flags
+    -e, --environment string 	: The name of the environment to use.
+
+Global Flags
+    -C, --cwd string 	: Sets the current working directory.
+        --debug      	: Enables debugging and diagnostics logging.
+        --docs       	: Opens the documentation for azd up in your web browser.
+    -h, --help       	: Gets help for up.
+        --no-prompt  	: Accepts the default value instead of prompting, or it fails if there is no default.
+
+Find a bug? Want to let us know how we're doing? Fill out this brief survey: https://aka.ms/azure-dev/hats.
+
+(base) thomaskamsker@MacBook-Pro azure-search-openai-demo %  azd env get-values   
+
+ERROR: ensuring environment exists: environment not specified
+(base) thomaskamsker@MacBook-Pro azure-search-openai-demo % azd up             
+? Enter a new environment name: azure-search-openai-demo
+? Select an Azure Subscription to use:  1. Azure-Abonnement 1 (2ee4d3e9-911f-419f-b365-391436a73699)
+? Select an Azure location to use: 21. (Europe) France Central (francecentral)
+? Enter a value for the 'documentIntelligenceResourceGroupLocation' infrastructure parameter:  1. (Europe) West Europe (westeurope)
+? Enter a value for the 'openAiResourceGroupLocation' infrastructure parameter:  4. (Europe) France Central (francecentral)
+
+Packaging services (azd package)
+
+  (✓) Done: Packaging service backend
+
+Checking if authentication should be setup...
+AZURE_USE_AUTHENTICATION is not set, skipping authentication setup.
+
+Provisioning Azure resources (azd provision)
+Provisioning Azure resources can take some time.
+
+Subscription: Azure-Abonnement 1 (2ee4d3e9-911f-419f-b365-391436a73699)
+Location: France Central
+
+  You can view detailed progress in the Azure Portal:
+  https://portal.azure.com/#view/HubsExtension/DeploymentDetailsBlade/~/overview/id/%2Fsubscriptions%2F2ee4d3e9-911f-419f-b365-391436a73699%2Fproviders%2FMicrosoft.Resources%2Fdeployments%2Fazure-search-openai-demo-1736162055
+
+  (✓) Done: Resource group: rg-azure-search-openai-demo (2.536s)
+  (✓) Done: Log Analytics workspace: log-bl2ss2isdh2jc (17.012s)
+  (✓) Done: Storage account: stbl2ss2isdh2jc (23.396s)
+  (✓) Done: Azure OpenAI: cog-bl2ss2isdh2jc (22.978s)
+  (✓) Done: Azure AI Services Model Deployment: cog-bl2ss2isdh2jc/chat (23.329s)
+  (✓) Done: Azure AI Services Model Deployment: cog-bl2ss2isdh2jc/embedding (23.65s)
+  (✓) Done: Application Insights: appi-bl2ss2isdh2jc (2.278s)
+  (✓) Done: Portal dashboard: dash-bl2ss2isdh2jc (660ms)
+  (✓) Done: Container Registry: azuresearchopenaidemoacrbl2ss2isdh2jc (15.691s)
+  (✓) Done: Document Intelligence: cog-di-bl2ss2isdh2jc (52.505s)
+  (✓) Done: Container Apps Environment: azure-search-openai-demo-aca-env (2m14.97s)
+  (✓) Done: Search service: gptkb-bl2ss2isdh2jc (4m59.893s)
+  (✓) Done: Container App: capps-backend-bl2ss2isdh2jc (26.478s)
+Creating Python virtual environment "app/backend/.venv"...
+Installing dependencies from "requirements.txt" into virtual environment (in quiet mode)...
+Running "prepdocs.py"
+[12:22:32] INFO     Loading azd env from /Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.azure/azure-search-openai-demo/.env, which may override existing environment variables                                                                                            load_azd_env.py:28
+           INFO     Connecting to Azure services using the azd credential for tenant 7237e154-50c1-4b9a-8b6c-100c90e7e542                                                                                                                                                                             prepdocs.py:321
+           INFO     Using local files: ./data/*                                                                                                                                                                                                                                                       prepdocs.py:104
+           INFO     Checking whether search index gptkbindex exists...                                                                                                                                                                                                                            searchmanager.py:70
+Traceback (most recent call last):
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/aiohttp/connector.py", line 1116, in _wrap_create_connection
+    return await self._loop.create_connection(*args, **kwargs, sock=sock)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 1112, in create_connection
+    transport, protocol = await self._create_connection_transport(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 1145, in _create_connection_transport
+    await waiter
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/sslproto.py", line 575, in _on_handshake_complete
+    raise handshake_exc
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/sslproto.py", line 557, in _do_handshake
+    self._sslobj.do_handshake()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/ssl.py", line 979, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/transport/_aiohttp.py", line 303, in send
+    result = await self.session.request(  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/aiohttp/client.py", line 663, in _request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/aiohttp/connector.py", line 538, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/aiohttp/connector.py", line 1050, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/aiohttp/connector.py", line 1384, in _create_direct_connection
+    raise last_exc
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/aiohttp/connector.py", line 1353, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/aiohttp/connector.py", line 1118, in _wrap_create_connection
+    raise ClientConnectorCertificateError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorCertificateError: Cannot connect to host gptkb-bl2ss2isdh2jc.search.windows.net:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)')]
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/./app/backend/prepdocs.py", line 439, in <module>
+    loop.run_until_complete(main(ingestion_strategy, setup_index=not args.remove and not args.removeall))
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/./app/backend/prepdocs.py", line 242, in main
+    await strategy.setup()
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/app/backend/prepdocslib/filestrategy.py", line 81, in setup
+    await search_manager.create_index()
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/app/backend/prepdocslib/searchmanager.py", line 74, in create_index
+    if self.search_info.index_name not in [name async for name in search_index_client.list_index_names()]:
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/app/backend/prepdocslib/searchmanager.py", line 74, in <listcomp>
+    if self.search_info.index_name not in [name async for name in search_index_client.list_index_names()]:
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/async_paging.py", line 142, in __anext__
+    return await self.__anext__()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/async_paging.py", line 145, in __anext__
+    self._page = await self._page_iterator.__anext__()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/async_paging.py", line 94, in __anext__
+    self._response = await self._get_next(self.continuation_token)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/search/documents/indexes/_generated/aio/operations/_indexes_operations.py", line 284, in get_next
+    pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/_base_async.py", line 219, in run
+    return await first_node.send(pipeline_request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/_base_async.py", line 68, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/_base_async.py", line 68, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/_base_async.py", line 68, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [Previous line repeated 2 more times]
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/policies/_redirect_async.py", line 73, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/policies/_retry_async.py", line 206, in send
+    raise err
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/policies/_retry_async.py", line 180, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/policies/_authentication_async.py", line 101, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/_base_async.py", line 68, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/_base_async.py", line 68, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/_base_async.py", line 68, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [Previous line repeated 2 more times]
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/_base_async.py", line 104, in send
+    await self._sender.send(request.http_request, **request.context.options),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/transport/_aiohttp.py", line 348, in send
+    raise ServiceRequestError(err, error=err) from err
+azure.core.exceptions.ServiceRequestError: Cannot connect to host gptkb-bl2ss2isdh2jc.search.windows.net:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)')]
+
+ERROR: error executing step command 'provision': failed running post hooks: 'postprovision' hook failed with exit code: '1', Path: '/var/folders/4t/6t3vy2wj2n38xrgp9917b0dw0000gp/T/azd-postprovision-4271342566.sh'. : exit code: 1
+(base) thomaskamsker@MacBook-Pro azure-search-openai-demo % 
+(base) thomaskamsker@MacBook-Pro azure-search-openai-demo % azd up 
+
+Packaging services (azd package)
+
+  (✓) Done: Packaging service backend
+
+Checking if authentication should be setup...
+AZURE_USE_AUTHENTICATION is not set, skipping authentication setup.
+
+Provisioning Azure resources (azd provision)
+Provisioning Azure resources can take some time.
+
+Subscription: Azure-Abonnement 1 (2ee4d3e9-911f-419f-b365-391436a73699)
+Location: France Central
+
+  You can view detailed progress in the Azure Portal:
+  https://portal.azure.com/#view/HubsExtension/DeploymentDetailsBlade/~/overview/id/%2Fsubscriptions%2F2ee4d3e9-911f-419f-b365-391436a73699%2Fproviders%2FMicrosoft.Resources%2Fdeployments%2Fazure-search-openai-demo-1736164269
+
+  (✓) Done: Resource group: rg-azure-search-openai-demo (2.904s)
+  (✓) Done: Storage account: stbl2ss2isdh2jc (626ms)
+  (✓) Done: Azure OpenAI: cog-bl2ss2isdh2jc (614ms)
+  (✓) Done: Azure AI Services Model Deployment: cog-bl2ss2isdh2jc/chat (928ms)
+  (✓) Done: Azure AI Services Model Deployment: cog-bl2ss2isdh2jc/embedding (1.204s)
+  (✓) Done: Log Analytics workspace: log-bl2ss2isdh2jc (347ms)
+  (✓) Done: Search service: gptkb-bl2ss2isdh2jc (1.077s)
+  (✓) Done: Application Insights: appi-bl2ss2isdh2jc (717ms)
+  (✓) Done: Portal dashboard: dash-bl2ss2isdh2jc (1.141s)
+  (✓) Done: Container Registry: azuresearchopenaidemoacrbl2ss2isdh2jc (11.834s)
+  (✓) Done: Document Intelligence: cog-di-bl2ss2isdh2jc (34.912s)
+  (✓) Done: Container Apps Environment: azure-search-openai-demo-aca-env (17.177s)
+  (✓) Done: Container App: capps-backend-bl2ss2isdh2jc (25.875s)
+Creating Python virtual environment "app/backend/.venv"...
+Installing dependencies from "requirements.txt" into virtual environment (in quiet mode)...
+Running "prepdocs.py"
+[12:52:53] INFO     Loading azd env from /Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.azure/azure-search-openai-demo/.env, which may override existing environment variables                                                                                            load_azd_env.py:28
+           INFO     Connecting to Azure services using the azd credential for tenant 7237e154-50c1-4b9a-8b6c-100c90e7e542                                                                                                                                                                             prepdocs.py:321
+           INFO     Using local files: ./data/*                                                                                                                                                                                                                                                       prepdocs.py:104
+           INFO     Checking whether search index gptkbindex exists...                                                                                                                                                                                                                            searchmanager.py:70
+Traceback (most recent call last):
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/aiohttp/connector.py", line 1116, in _wrap_create_connection
+    return await self._loop.create_connection(*args, **kwargs, sock=sock)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 1112, in create_connection
+    transport, protocol = await self._create_connection_transport(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 1145, in _create_connection_transport
+    await waiter
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/sslproto.py", line 575, in _on_handshake_complete
+    raise handshake_exc
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/sslproto.py", line 557, in _do_handshake
+    self._sslobj.do_handshake()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/ssl.py", line 979, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/transport/_aiohttp.py", line 303, in send
+    result = await self.session.request(  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/aiohttp/client.py", line 663, in _request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/aiohttp/connector.py", line 538, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/aiohttp/connector.py", line 1050, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/aiohttp/connector.py", line 1384, in _create_direct_connection
+    raise last_exc
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/aiohttp/connector.py", line 1353, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/aiohttp/connector.py", line 1118, in _wrap_create_connection
+    raise ClientConnectorCertificateError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorCertificateError: Cannot connect to host gptkb-bl2ss2isdh2jc.search.windows.net:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)')]
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/./app/backend/prepdocs.py", line 439, in <module>
+    loop.run_until_complete(main(ingestion_strategy, setup_index=not args.remove and not args.removeall))
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/./app/backend/prepdocs.py", line 242, in main
+    await strategy.setup()
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/app/backend/prepdocslib/filestrategy.py", line 81, in setup
+    await search_manager.create_index()
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/app/backend/prepdocslib/searchmanager.py", line 74, in create_index
+    if self.search_info.index_name not in [name async for name in search_index_client.list_index_names()]:
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/app/backend/prepdocslib/searchmanager.py", line 74, in <listcomp>
+    if self.search_info.index_name not in [name async for name in search_index_client.list_index_names()]:
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/async_paging.py", line 142, in __anext__
+    return await self.__anext__()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/async_paging.py", line 145, in __anext__
+    self._page = await self._page_iterator.__anext__()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/async_paging.py", line 94, in __anext__
+    self._response = await self._get_next(self.continuation_token)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/search/documents/indexes/_generated/aio/operations/_indexes_operations.py", line 284, in get_next
+    pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/_base_async.py", line 219, in run
+    return await first_node.send(pipeline_request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/_base_async.py", line 68, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/_base_async.py", line 68, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/_base_async.py", line 68, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [Previous line repeated 2 more times]
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/policies/_redirect_async.py", line 73, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/policies/_retry_async.py", line 206, in send
+    raise err
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/policies/_retry_async.py", line 180, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/policies/_authentication_async.py", line 101, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/_base_async.py", line 68, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/_base_async.py", line 68, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/_base_async.py", line 68, in send
+    response = await self.next.send(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [Previous line repeated 2 more times]
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/_base_async.py", line 104, in send
+    await self._sender.send(request.http_request, **request.context.options),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/thomaskamsker/Documents/Atom/AI/CURSOR/azure-search-openai-demo/.venv/lib/python3.11/site-packages/azure/core/pipeline/transport/_aiohttp.py", line 348, in send
+    raise ServiceRequestError(err, error=err) from err
+azure.core.exceptions.ServiceRequestError: Cannot connect to host gptkb-bl2ss2isdh2jc.search.windows.net:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)')]
+
+ERROR: error executing step command 'provision': failed running post hooks: 'postprovision' hook failed with exit code: '1', Path: '/var/folders/4t/6t3vy2wj2n38xrgp9917b0dw0000gp/T/azd-postprovision-2942699931.sh'. : exit code: 1
+(base) thomaskamsker@MacBook-Pro azure-search-openai-demo % 
