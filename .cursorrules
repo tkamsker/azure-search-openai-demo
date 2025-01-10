@@ -1,0 +1,113 @@
+{
+    "version": "1.0",
+    "requirements": {
+        "python": ">=3.9",
+        "node": ">=14.0.0",
+        "npm_packages": {
+            "prettier": "^3.3.3",
+            "typescript": "^5.6.3"
+        },
+        "python_packages": {
+            "ruff": "latest",
+            "black": "latest",
+            "mypy": "1.13.0"
+        }
+    },
+    "language_defaults": {
+        "tab_width": 4,
+        "max_line_length": 160
+    },
+    "formatters": {
+        "prettier": {
+            "enabled": true,
+            "config": {
+                "tabWidth": 4,
+                "printWidth": 160,
+                "arrowParens": "avoid",
+                "trailingComma": "none"
+            }
+        },
+        "black": {
+            "enabled": true,
+            "line_length": 160
+        },
+        "ruff": {
+            "enabled": true,
+            "config": {
+                "target-version": "py38",
+                "select": ["E", "F", "I", "UP"],
+                "ignore": ["E501", "E701"]
+            }
+        },
+        "mypy": {
+            "enabled": true,
+            "config": {
+                "python_version": "3.9",
+                "check_untyped_defs": true
+            }
+        }
+    },
+    "ignore_patterns": [
+        "node_modules/",
+        ".venv/",
+        "dist/",
+        "build/",
+        "*.pyc",
+        "__pycache__/",
+        "coverage/",
+        "test-results/",
+        "static/",
+        ".coverage",
+        ".pytest_cache",
+        ".ruff_cache",
+        ".mypy_cache"
+    ],
+    "language_specific_rules": {
+        "typescript": {
+            "indent_style": "space",
+            "indent_size": 4,
+            "quote_type": "double",
+            "target": "ESNext"
+        },
+        "python": {
+            "indent_style": "space",
+            "indent_size": 4,
+            "max_line_length": 160
+        },
+        "css": {
+            "indent_style": "space",
+            "indent_size": 4
+        },
+        "markdown": {
+            "max_line_length": 160
+        },
+        "bicep": {
+            "indent_style": "space",
+            "indent_size": 4
+        }
+    },
+    "file_patterns": {
+        "app/frontend/src/**/*.{ts,tsx}": {
+            "formatter": "prettier"
+        },
+        "app/backend/**/*.py": {
+            "formatter": ["black", "ruff", "mypy"]
+        },
+        "infra/**/*.bicep": {
+            "formatter": "default"
+        },
+        "**/*.css": {
+            "formatter": "prettier"
+        },
+        "**/*.{md,markdown}": {
+            "formatter": "prettier"
+        }
+    },
+    "test_requirements": {
+        "python": {
+            "framework": "pytest",
+            "coverage": true,
+            "minimum_coverage": 100
+        }
+    }
+} 
